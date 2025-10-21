@@ -1,0 +1,6 @@
+path: /Users/daniel/Desktop/Study/Computer Vision/HW1/hw1_314706007/code_314706007/src/artifacts/pig_detection_yolo/20251010-212644/dataset
+train: images/train
+val: images/val
+nc: 1
+names:
+  0: pig
