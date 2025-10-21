@@ -217,3 +217,5 @@ dataset/
 # .pt file
 *.pt
 *.pth
+
+.DS_Store
