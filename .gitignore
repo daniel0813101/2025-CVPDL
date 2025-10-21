@@ -210,3 +210,9 @@ pyrightconfig.json
 # Training data & Testing data
 test/
 train/
+Assignment Submission/
+val/
+dataset/
+
+# .pt file
+*.pt
