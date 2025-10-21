@@ -216,3 +216,4 @@ dataset/
 
 # .pt file
 *.pt
+*.pth
