@@ -209,10 +209,12 @@ pyrightconfig.json
 ### Custom ###
 # Training data & Testing data
 test/
-train/
+infer/
 Assignment Submission/
-val/
 dataset/
+taica-cvpdl-2025-hw-2/
+taica-cvpdl-2025-hw-1/
+
 
 # .pt file
 *.pt

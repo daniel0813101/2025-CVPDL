@@ -1,0 +1,10 @@
+path: /home/daniel/Study/ComputerVision/2025-CVPDL/HW2/hw2_314706007/code_314706007/src/artifacts/yolov11_baseline_from_scratch/20251022-130853/dataset
+train: images/train
+val: images/val
+test: images/test
+nc: 4
+names:
+  0: car
+  1: hov
+  2: person
+  3: motorcycle
