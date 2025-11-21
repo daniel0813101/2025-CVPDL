@@ -1,22 +1,49 @@
-# ==========================
-# Jupyter Notebooks
-# ==========================
+# ----------------------------------------
+# Jupyter Notebook Handling (Best Practice)
+# ----------------------------------------
 
-# Strip metadata on commit (keep code + output, remove useless metadata)
+# Use nbstripout to clean notebooks before commit
 *.ipynb filter=nbstripout
 
-# Avoid merge conflicts on notebooks
+# Avoid merge conflicts: always prefer local version
 *.ipynb merge=ours
 
-# Ignore notebook diffs (metadata noisy), treat notebooks as binary
+# Disable diff output for notebooks (GitHub/CLI won't show giant JSON)
 *.ipynb diff=none
 
-# ==========================
-# Common binary/big files
-# ==========================
+# Normalize newline style
+*.ipynb text eol=lf
+
+# ----------------------------------------
+# Python Files
+# ----------------------------------------
+*.py text eol=lf
+
+# ----------------------------------------
+# Shell / YAML / JSON / Config Files
+# ----------------------------------------
+*.sh text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# ----------------------------------------
+# Images, models, binaries (treat as binary)
+# ----------------------------------------
 *.png binary
 *.jpg binary
 *.jpeg binary
-*.csv text eol=lf
-*.docx binary
-*.pdf binary
+*.gif binary
+*.pt binary
+*.pth binary
+*.ckpt binary
+*.onnx binary
+*.tflite binary
+
+# ----------------------------------------
+# Compressed Files
+# ----------------------------------------
+*.zip binary
+*.tar binary
+*.gz  binary
+*.7z  binary

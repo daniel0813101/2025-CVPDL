@@ -217,6 +217,10 @@ dataset_stage2/
 taica-cvpdl-2025-hw-2/
 taica-cvpdl-2025-hw-1/
 
+# Logs
+logs/
+generated/
+
 
 # .pt file
 *.pt

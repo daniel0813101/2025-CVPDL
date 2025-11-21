@@ -1,9 +1,11 @@
 import argparse
 import math
+from datetime import datetime
 from pathlib import Path
 
 import torch
 from torchvision import utils
+from tqdm.auto import tqdm
 
 from diffusion_model import GaussianDiffusion, UNet
 
@@ -48,13 +50,15 @@ def generate_images(
     total_batches = math.ceil(num_images / batch_size)
     idx = start_index
     diffusion.eval()
-    for _ in range(total_batches):
-        cur_batch = min(batch_size, num_images - (idx - start_index))
-        samples = diffusion.sample(cur_batch, device=device)
-        samples = (samples.clamp(-1, 1) + 1) * 0.5  # [0,1]
-        for j in range(cur_batch):
-            utils.save_image(samples[j], out_dir / f"{idx:05d}.png")
-            idx += 1
+    with tqdm(range(total_batches), desc="Generating", unit="batch") as pbar:
+        for _ in pbar:
+            cur_batch = min(batch_size, num_images - (idx - start_index))
+            samples = diffusion.sample(cur_batch, device=device)
+            samples = (samples.clamp(-1, 1) + 1) * 0.5  # [0,1]
+            for j in range(cur_batch):
+                utils.save_image(samples[j], out_dir / f"{idx:05d}.png")
+                idx += 1
+            pbar.set_postfix(images_done=idx - start_index)
 
 
 def parse_args():
@@ -71,7 +75,7 @@ def parse_args():
         "--out_dir",
         type=Path,
         default=Path("./generated"),
-        help="Output directory for generated PNGs",
+        help="Root output directory for generated PNGs (a timestamp subfolder is created inside)",
     )
     parser.add_argument("--num_images", type=int, default=10000)
     parser.add_argument("--batch_size", type=int, default=64)
@@ -96,14 +100,15 @@ def main():
     )
     diffusion = build_model(args.image_size, args.channels).to(device)
     load_checkpoint(diffusion, args.ckpt, use_ema=args.use_ema)
+    run_dir = args.out_dir / datetime.now().strftime("%Y%m%d-%H%M%S")
     generate_images(
         diffusion=diffusion,
         device=device,
-        out_dir=args.out_dir,
+        out_dir=run_dir,
         num_images=args.num_images,
         batch_size=args.batch_size,
     )
-    print(f"Generated {args.num_images} images to {args.out_dir}")
+    print(f"Generated {args.num_images} images to {run_dir}")
 
 
 if __name__ == "__main__":
