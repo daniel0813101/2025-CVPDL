@@ -3,15 +3,15 @@
 # ----------------------------------------
 
 # Use nbstripout to clean notebooks before commit
-*.ipynb filter=nbstripout
+# *.ipynb filter=nbstripout
 
-# Avoid merge conflicts: always prefer local version
-*.ipynb merge=ours
+# # Avoid merge conflicts: always prefer local version
+# *.ipynb merge=ours
 
-# Disable diff output for notebooks (GitHub/CLI won't show giant JSON)
-*.ipynb diff=none
+# # Disable diff output for notebooks (GitHub/CLI won't show giant JSON)
+# *.ipynb diff=none
 
-# Normalize newline style
+# # Normalize newline style
 *.ipynb text eol=lf
 
 # ----------------------------------------
